@@ -8,4 +8,3 @@ class IndexViewTestCase(TestCase):
 
         assert result.status_code == 200
         assert b'<title>Holiday Homes</title>' in result.content
-
