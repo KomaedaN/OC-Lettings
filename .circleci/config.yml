@@ -28,9 +28,18 @@ jobs:
           name: Linting
           command: |
             flake8
-# Invoke jobs via workflows
-# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
+    container:
+      docker:
+        - image: cimg/python:3.10
+      step:
+        - checkout
+        - run:
+            name: Build Docker Image
+            command: |
+              docker build --tag oc-lettings .
+              docker run --publish 8000:8000 oc-lettings
+
 workflows:
-  tests and linting:
+  test and linting:
     jobs:
       - build
