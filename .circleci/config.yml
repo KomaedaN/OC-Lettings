@@ -28,19 +28,13 @@ jobs:
           name: Linting
           command: |
             flake8
-    container:
-      docker:
-        - image: cimg/python:3.10
-      step:
-        - checkout
-        - run:
-            name: Build Docker Image
-            command: |
-              docker build --tag oc-lettings .
-              docker run --publish 8000:8000 oc-lettings
+      - run:
+          name: Build Docker Image
+          command: |
+            docker build --tag oc-lettings:$CIRCLE_SHA1 .
+            docker run --publish 8000:8000 oc-lettings
 
 workflows:
   test and linting:
     jobs:
       - build
-      - container
