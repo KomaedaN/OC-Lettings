@@ -43,3 +43,4 @@ workflows:
   test and linting:
     jobs:
       - build
+      - container
