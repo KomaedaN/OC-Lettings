@@ -58,10 +58,10 @@ jobs:
             echo "$HEROKU_API" | heroku login --api-key
 
       - run:
-        name: Push Docker Image to Heroku
-        command: |
-          heroku container:push --app $HEROKU_NAME web
-          heroku_container:release --app $HEROKU_NAME web
+          name: Push Docker Image to Heroku
+          command: |
+            heroku container:push --app $HEROKU_NAME web
+            heroku_container:release --app $HEROKU_NAME web
 
 
 workflows:
