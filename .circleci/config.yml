@@ -28,6 +28,7 @@ jobs:
           name: Linting
           command: |
             flake8
+      - setup_remote_docker
       - run:
           name: Build Docker Image
           command: |
