@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  heroku: heroku/install
+  heroku: circleci/heroku@2.0
 
 
 jobs:
@@ -50,8 +50,8 @@ jobs:
   deploy-to-heroku:
     executor: heroku/default
     steps:
-      - heroku/install-cli
-      - heroku/login
+      - checkout
+      - heroku/install
       - heroku/deploy-docker-image:
           app_name: $HEROKU_NAME
           image_name: $DOCKER_USERNAME/$DOCKER_REPO:$CIRCLE_SHA1
@@ -65,3 +65,6 @@ workflows:
       - build-docker:
           requires:
             - build-test-linting
+      - deploy-to-heroku:
+          requires:
+            -build-docker
