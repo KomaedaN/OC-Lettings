@@ -41,7 +41,7 @@ jobs:
           command: |
             echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
             docker build --tag oc-lettings:$CIRCLE_SHA1 .
-            docker push oc-lettings:$CIRCLE_SHA1
+            docker push $DOCKER_USERNAME/$DOCKER_REPO:$CIRCLE_SHA1
 
 workflows:
   main:
