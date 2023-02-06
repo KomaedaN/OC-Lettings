@@ -52,10 +52,16 @@ jobs:
     steps:
       - checkout
       - heroku/install
-      - heroku/deploy-docker-image:
-          app_name: $HEROKU_NAME
-          image_name: $DOCKER_USERNAME/$DOCKER_REPO:$CIRCLE_SHA1
+      - run:
+          name: Login to Heroku
+          command: |
+            echo "$HEROKU_API" | heroku login --api-key
 
+      -run:
+        name: Push Docker Image to Heroku
+        command: |
+          heroku container:push --app $HEROKU_NAME web
+          heroku_container:release --app $HEROKU_NAME web
 
 
 workflows:
