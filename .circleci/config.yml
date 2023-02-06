@@ -1,13 +1,13 @@
 version: 2.1
 
-# Define a job to be invoked later in a workflow.
-# See: https://circleci.com/docs/2.0/configuration-reference/#jobs
+orbs:
+  heroku: heroku/install
+
+
 jobs:
   build-test-linting:
     docker:
       - image: cimg/python:3.10
-    # Add steps to the job
-    # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:
       - checkout
       - run:
@@ -46,6 +46,17 @@ jobs:
             docker build --tag oc-lettings:$CIRCLE_SHA1 .
             docker tag oc-lettings:$CIRCLE_SHA1 $DOCKER_USERNAME/oc-lettings:$CIRCLE_SHA1
             docker push $DOCKER_USERNAME/$DOCKER_REPO:$CIRCLE_SHA1
+
+  deploy-to-heroku:
+    executor: heroku/default
+    steps:
+      - heroku/install-cli
+      - heroku/login
+      - heroku/deploy-docker-image:
+          app_name: $HEROKU_NAME
+          image_name: $DOCKER_USERNAME/$DOCKER_REPO:$CIRCLE_SHA1
+
+
 
 workflows:
   main:
