@@ -45,4 +45,6 @@ workflows:
   main:
     jobs:
       - build-test-linting
-      - build-docker
+      - build-docker:
+          requires:
+            - build-test-linting
