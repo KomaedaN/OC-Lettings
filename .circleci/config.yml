@@ -55,8 +55,7 @@ jobs:
       - run:
           name: Login to Heroku
           command: |
-            echo "$HEROKU_PASSWORD" | heroku login -i -u "$HEROKU_USERNAME" --password-stdin
-            heroku container:login
+            ${HEROKU_API} heroku container:login
 
       - run:
           name: Push Docker Image to Heroku
