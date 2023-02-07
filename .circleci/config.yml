@@ -62,7 +62,7 @@ jobs:
           name: Push Docker Image to Heroku
           command: |
             HEROKU_API_KEY=${HEROKU_API} heroku container:push --app $HEROKU_NAME web
-            HEROKU_API_KEY=${HEROKU_API} heroku_container:release --app $HEROKU_NAME web
+            HEROKU_API_KEY=${HEROKU_API} heroku container:release --app $HEROKU_NAME web
 
 
 workflows:
