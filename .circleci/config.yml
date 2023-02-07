@@ -55,7 +55,7 @@ jobs:
       - run:
           name: Login to Heroku
           command: |
-            ${HEROKU_API} heroku container:login
+            HEROKU_API_KEY=${HEROKU_API} heroku container:login
 
       - run:
           name: Push Docker Image to Heroku
