@@ -55,9 +55,7 @@ jobs:
       - run:
           name: Login to Heroku
           command: |
-            echo "HEROKU_API=${HEROKU_API}"
-            echo "${HEROKU_API}" | heroku auth:token
-            echo ${HEROKU_API} | heroku login --interactive
+            echo "$HEROKU_PASSWORD" | heroku login -i --username "$HEROKU_USERNAME" --password-stdin
             heroku container:login
 
       - run:
