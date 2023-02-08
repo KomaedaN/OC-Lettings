@@ -18,8 +18,8 @@ jobs:
             pip install --upgrade pip
       - run:
           name: Install dependencies
-          command: |
-            pip install -r requirements.txt
+          command: pip install -r requirements.txt
+
       - run:
           name: Run Tests
           command: |
@@ -43,8 +43,7 @@ jobs:
       - run:
           name: Build and push Docker Image
           command: |
-            docker build --tag oc-lettings:$CIRCLE_SHA1 .
-            docker tag oc-lettings:$CIRCLE_SHA1 $DOCKER_USERNAME/oc-lettings:$CIRCLE_SHA1
+            docker build --tag $DOCKER_USERNAME/$DOCKER_REPO:$CIRCLE_SHA1 .
             docker push $DOCKER_USERNAME/$DOCKER_REPO:$CIRCLE_SHA1
 
   deploy-to-heroku:
@@ -55,13 +54,14 @@ jobs:
       - heroku/install
       - run:
           name: Login to Heroku
-          command: |
-            HEROKU_API_KEY=${HEROKU_API} heroku container:login
+          command: HEROKU_API_KEY=${HEROKU_API} heroku container:login
 
       - run:
           name: Push Docker Image to Heroku
           command: |
-            HEROKU_API_KEY=${HEROKU_API} heroku container:push --app $HEROKU_NAME web
+            echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
+            docker pull $DOCKER_USERNAME/$DOCKER_REPO:$CIRCLE_SHA1
+            docker tag $DOCKER_USERNAME/$DOCKER_REPO:$CIRCLE_SHA1 registry.heroku.com/$HEROKU_NAME/web
             HEROKU_API_KEY=${HEROKU_API} heroku container:release --app $HEROKU_NAME web
 
 
