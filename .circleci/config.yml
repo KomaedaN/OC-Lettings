@@ -59,9 +59,10 @@ jobs:
       - run:
           name: Push Docker Image to Heroku
           command: |
-            echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
-            docker pull $DOCKER_USERNAME/$DOCKER_REPO:$CIRCLE_SHA1
-            docker tag $DOCKER_USERNAME/$DOCKER_REPO:$CIRCLE_SHA1 registry.heroku.com/$HEROKU_NAME/web
+            # echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
+            # docker pull $DOCKER_USERNAME/$DOCKER_REPO:$CIRCLE_SHA1
+            # docker tag $DOCKER_USERNAME/$DOCKER_REPO:$CIRCLE_SHA1 registry.heroku.com/$HEROKU_NAME/web 
+            HEROKU_API_KEY=${HEROKU_API} heroku container:push --app $HEROKU_NAME web
             HEROKU_API_KEY=${HEROKU_API} heroku container:release --app $HEROKU_NAME web
 
 
