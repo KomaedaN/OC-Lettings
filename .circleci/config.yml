@@ -28,7 +28,10 @@ jobs:
           name: Linting
           command: |
             flake8
-      
+
+      branches:
+      only:
+        - test
 
   build-docker:
     docker:
