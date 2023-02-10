@@ -29,10 +29,6 @@ jobs:
           command: |
             flake8
 
-    branches:
-      only:
-        - test
-
   build-docker:
     docker:
       - image: cimg/python:3.10
@@ -72,7 +68,11 @@ jobs:
 workflows:
   main:
     jobs:
-      - build-test-linting
+      - build-test-linting:
+          filters:
+            branches:
+              only:
+                - test
       - build-docker:
           requires:
             - build-test-linting
