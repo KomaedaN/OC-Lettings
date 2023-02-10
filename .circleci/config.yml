@@ -68,14 +68,14 @@ jobs:
 workflows:
   main:
     jobs:
-      - build-test-linting:
-          filters:
-            branches:
-              only:
-                - test
+      - build-test-linting
       - build-docker:
           requires:
             - build-test-linting
       - deploy-to-heroku:
           requires:
             - build-docker
+          filters:
+            branches:
+              only:
+                - test
