@@ -22,13 +22,11 @@ jobs:
 
       - run:
           name: Run Tests
-          command: |
-            SENTRY_DNS=$SENTRY_DSN
-            pytest
+          command: pytest
+
       - run:
           name: Linting
-          command: |
-            flake8
+          command: flake8
 
   build-docker:
     docker:
@@ -38,8 +36,7 @@ jobs:
       - setup_remote_docker
       - run:
           name: Login to Docker Hub
-          command: |
-            echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
+          command: echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
       - run:
           name: Build and push Docker Image
           command: |

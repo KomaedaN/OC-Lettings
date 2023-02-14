@@ -108,6 +108,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 sentry_sdk.init(
-    dsn=config('SENTRY_DSN'),
+    dsn='$SENTRY_DSN',
     traces_sample_rate=1.0
 )
