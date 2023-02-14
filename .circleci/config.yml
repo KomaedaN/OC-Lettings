@@ -23,6 +23,7 @@ jobs:
       - run:
           name: Run Tests
           command: |
+            SENTRY_DNS=$SENTRY_DSN
             pytest
       - run:
           name: Linting
