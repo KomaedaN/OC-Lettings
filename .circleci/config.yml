@@ -8,17 +8,17 @@ jobs:
   build-test-linting:
     docker:
       - image: cimg/python:3.10
+
+    environment:
+      SENTRY_DSN: $SENTRY_DSN
+
     steps:
       - checkout
       - run:
-          name: Create virtual environment
-          command: |
-            python -m venv env
-            source env/bin/activate
-            pip install --upgrade pip
-      - run:
           name: Install dependencies
-          command: pip install -r requirements.txt
+          command: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
 
       - run:
           name: Run Tests
