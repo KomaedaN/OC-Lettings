@@ -46,7 +46,7 @@ SENTRY_DSN
 
 - Create a new Heroku app
 - In this project go to "settings" > "Config Vars"
-- Then create SENTRY_DSN variable and add your Sentry link
+- Then create "SENTRY_DSN" variable and add your Sentry link
 
 ## Sentry 
 
