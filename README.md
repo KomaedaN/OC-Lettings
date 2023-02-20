@@ -1,77 +1,53 @@
-## Résumé
+## Environment
 
-Site web d'Orange County Lettings
+- Clone this repository 
+- Create a virtual environment: "python -m venv env"
+- Activate the virtual environment: "env/Scripts/activate.ps1"
+- Install requirements: pip install -r requirements.txt
 
-## Développement local
+## Environment variable 
 
-### Prérequis
+- cd ```/Python-OC-Lettings-FR/oc_lettings_site```
+- Create a ".env" file inside "oc_lettings_site" folder
+- Add your Sentry dsn and Django key value like this: 
+```
+SENTRY_DSN=YOURVALUE
+DJANGO_KEY=YOURVALUE
+```
 
-- Compte GitHub avec accès en lecture à ce repository
-- Git CLI
-- SQLite3 CLI
-- Interpréteur Python, version 3.6 ou supérieure
 
-Dans le reste de la documentation sur le développement local, il est supposé que la commande `python` de votre OS shell exécute l'interpréteur Python ci-dessus (à moins qu'un environnement virtuel ne soit activé).
+## Run site
 
-### macOS / Linux
+- cd ```/Python-OC-Lettings-FR```
+- Run server: "python manage.py runserver"
 
-#### Cloner le repository
+## Linting and unit tests
 
-- `cd /path/to/put/project/in`
-- `git clone https://github.com/OpenClassrooms-Student-Center/Python-OC-Lettings-FR.git`
+- cd ```/Python-OC-Lettings-FR```
+- Linting: "flake8"
+- Tests: pytest
 
-#### Créer l'environnement virtuel
+## CircleCI
 
-- `cd /path/to/Python-OC-Lettings-FR`
-- `python -m venv venv`
-- `apt-get install python3-venv` (Si l'étape précédente comporte des erreurs avec un paquet non trouvé sur Ubuntu)
-- Activer l'environnement `source venv/bin/activate`
-- Confirmer que la commande `python` exécute l'interpréteur Python dans l'environnement virtuel
-`which python`
-- Confirmer que la version de l'interpréteur Python est la version 3.6 ou supérieure `python --version`
-- Confirmer que la commande `pip` exécute l'exécutable pip dans l'environnement virtuel, `which pip`
-- Pour désactiver l'environnement, `deactivate`
+- In you CircleCI project go to "Project Settings" > Environment Variables 
+- Then create all this Variables and add your values:
+```
+DOCKER_PASSWORD	
+DOCKER_REPO	
+DOCKER_USERNAME	
+HEROKU_API	
+HEROKU_NAME	
+HEROKU_PASSWORD	
+HEROKU_USERNAME	
+SENTRY_DSN
+```
 
-#### Exécuter le site
+## Heroku
 
-- `cd /path/to/Python-OC-Lettings-FR`
-- `source venv/bin/activate`
-- `pip install --requirement requirements.txt`
-- `python manage.py runserver`
-- Aller sur `http://localhost:8000` dans un navigateur.
-- Confirmer que le site fonctionne et qu'il est possible de naviguer (vous devriez voir plusieurs profils et locations).
+- Create a new Heroku app
+- In this project go to "settings" > "Config Vars"
+- Then create SENTRY_DSN variable and add your Sentry link
 
-#### Linting
+## Sentry 
 
-- `cd /path/to/Python-OC-Lettings-FR`
-- `source venv/bin/activate`
-- `flake8`
-
-#### Tests unitaires
-
-- `cd /path/to/Python-OC-Lettings-FR`
-- `source venv/bin/activate`
-- `pytest`
-
-#### Base de données
-
-- `cd /path/to/Python-OC-Lettings-FR`
-- Ouvrir une session shell `sqlite3`
-- Se connecter à la base de données `.open oc-lettings-site.sqlite3`
-- Afficher les tables dans la base de données `.tables`
-- Afficher les colonnes dans le tableau des profils, `pragma table_info(Python-OC-Lettings-FR_profile);`
-- Lancer une requête sur la table des profils, `select user_id, favorite_city from
-  Python-OC-Lettings-FR_profile where favorite_city like 'B%';`
-- `.quit` pour quitter
-
-#### Panel d'administration
-
-- Aller sur `http://localhost:8000/admin`
-- Connectez-vous avec l'utilisateur `admin`, mot de passe `Abc1234!`
-
-### Windows
-
-Utilisation de PowerShell, comme ci-dessus sauf :
-
-- Pour activer l'environnement virtuel, `.\venv\Scripts\Activate.ps1` 
-- Remplacer `which <my-command>` par `(Get-Command <my-command>).Path`
+-  Sentry error can be tested at /sentry-debug/
