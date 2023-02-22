@@ -27,6 +27,23 @@ DJANGO_KEY=YOURVALUE
 - Linting: "flake8"
 - Tests: pytest
 
+## Sentry 
+
+- Create a project on Sentry
+- Find your DSN go to your project "settings" > "SDK SETUP" > "Client Keys (DSN)" > "DSN"
+- Sentry error can be tested at /sentry-debug/
+
+## Heroku
+
+- Create a new Heroku app
+- In this app go to "settings" > "Config Vars"
+- Then create "SENTRY_DSN" variable and add your Sentry link
+
+## Docker
+
+- Pull your image from DockerHub: ```docker pull username/image:tag``` 
+- To run Use: ```docker run --env-file oc_lettings_site/.env -e PORT=8000 -p 8000:8000 username/image:tag```
+
 ## CircleCI
 
 - In you CircleCI project go to "Project Settings" > Environment Variables 
@@ -41,18 +58,3 @@ HEROKU_PASSWORD
 HEROKU_USERNAME	
 SENTRY_DSN
 ```
-
-## Heroku
-
-- Create a new Heroku app
-- In this project go to "settings" > "Config Vars"
-- Then create "SENTRY_DSN" variable and add your Sentry link
-
-## Docker
-
-- Pull your image from dockerhub
-- To run Use: ```docker run --env-file oc_lettings_site/.env -e PORT=8000 -p 8000:8000 username/image:tag```
-
-## Sentry 
-
--  Sentry error can be tested at /sentry-debug/
