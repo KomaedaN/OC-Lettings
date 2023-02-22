@@ -48,6 +48,11 @@ SENTRY_DSN
 - In this project go to "settings" > "Config Vars"
 - Then create "SENTRY_DSN" variable and add your Sentry link
 
+## Docker
+
+- Pull your image from dockerhub
+- To run Use: ```docker run --env-file oc_lettings_site/.env -e PORT=8000 -p 8000:8000 username/image:tag```
+
 ## Sentry 
 
 -  Sentry error can be tested at /sentry-debug/
