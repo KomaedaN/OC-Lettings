@@ -4,7 +4,7 @@ from lettings.models import Letting, Address
 
 
 class LettingsTest(TestCase):
-    def setUp(self):ggg
+    def setUp(self):
         address = Address.objects.create(
             number=1234,
             street='Test Street',
